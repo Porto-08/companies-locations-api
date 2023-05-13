@@ -1,6 +1,13 @@
 import { User } from '../../../../users/infra/typeorm/entities/User';
 import { ICompany } from '../../../domain/models/ICompany';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity('companys')
 export class Company implements ICompany {
@@ -16,12 +23,14 @@ export class Company implements ICompany {
   @Column()
   cnpj: string;
 
-  @Column()
+  @CreateDateColumn()
   created_at: Date;
 
-  @Column()
+  @UpdateDateColumn()
   updated_at: Date;
 
-  @ManyToOne(() => User, (user) => user.companys)
+  @ManyToOne(() => User, (user) => user.companys, {
+    onDelete: 'CASCADE',
+  })
   user: User;
 }

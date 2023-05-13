@@ -12,6 +12,7 @@ import { User } from './modules/users/infra/typeorm/entities/User';
 import { AuthModule } from './modules/auth/auth.module';
 import { AuthMiddleware } from './shared/middlewares/auth.middleware';
 import { Company } from './modules/companys/infra/typeorm/entities/Company';
+import { CompanyModule } from './modules/companys/company.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { Company } from './modules/companys/infra/typeorm/entities/Company';
     }),
     UserModule,
     AuthModule,
+    CompanyModule,
   ],
   controllers: [AppController],
   providers: [AppService],

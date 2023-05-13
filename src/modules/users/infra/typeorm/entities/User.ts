@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import { IUser } from '../../../domain/models/IUser';
 import { Company } from 'src/modules/companys/infra/typeorm/entities/Company';
+import { Exclude } from 'class-transformer';
 
 @Entity('users')
 export class User implements IUser {
@@ -20,7 +21,7 @@ export class User implements IUser {
   @Column()
   email: string;
 
-  @Column()
+  @Column({ select: false })
   password: string;
 
   @CreateDateColumn()
