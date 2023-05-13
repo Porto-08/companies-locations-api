@@ -3,6 +3,7 @@ import { IUserRepository } from '../../../domain/repositories/IUserRepository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../entities/User';
 import { Repository } from 'typeorm';
+import { ICreatedUser } from 'src/modules/users/domain/models/ICreatedUser';
 
 @Injectable()
 export class UsersRepository implements IUserRepository {
@@ -35,7 +36,7 @@ export class UsersRepository implements IUserRepository {
     return user;
   }
 
-  async save(user: User): Promise<User> {
+  async save(user: ICreatedUser): Promise<User> {
     const newUser = await this.usersRepository.save(user);
 
     return newUser;

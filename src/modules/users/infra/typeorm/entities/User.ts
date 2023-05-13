@@ -6,6 +6,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { IUser } from '../../../domain/models/IUser';
+import { Exclude } from 'class-transformer';
 
 @Entity('users')
 export class User implements IUser {
@@ -18,7 +19,10 @@ export class User implements IUser {
   @Column()
   email: string;
 
-  @Column()
+  @Column({
+    select: false,
+  })
+  @Exclude()
   password: string;
 
   @CreateDateColumn()
