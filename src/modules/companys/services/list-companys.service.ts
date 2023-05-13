@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CompanyRepository } from '../infra/typeorm/repositories/CompanyRepository';
-import { DefaultOutput } from '../interfaces';
+import { Company } from '../infra/typeorm/entities/Company';
 
 @Injectable()
 export class ListCompanyService {
@@ -9,19 +9,9 @@ export class ListCompanyService {
     private readonly companyRepository: CompanyRepository,
   ) {}
 
-  async execute(): Promise<DefaultOutput[]> {
+  async execute(): Promise<Company[]> {
     const companys = await this.companyRepository.list();
 
-    const companysFormatted = companys.map((company) => {
-      return {
-        id: company.id,
-        name: company.name,
-        cnpj: company.cnpj,
-        website: company.website,
-        user_id: company.user.id,
-      };
-    });
-
-    return companysFormatted;
+    return companys;
   }
 }

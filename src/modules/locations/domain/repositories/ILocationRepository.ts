@@ -1,3 +1,6 @@
+import { ICreateLocation } from '../models/ICreateLocation';
+import { ILocation } from '../models/ILocation';
+
 export interface ILocationRepository {
   save(location: ICreateLocation): Promise<ILocation>;
   findById(id: number): Promise<ILocation | undefined>;

@@ -15,7 +15,7 @@ export class CompanyRepository implements ICompanyRepository {
   async findById(id: number): Promise<Company | undefined> {
     const company = await this.companyRepository.findOne({
       where: { id },
-      relations: ['user'],
+      relations: ['user', 'locations'],
     });
 
     if (!company) {
@@ -61,7 +61,7 @@ export class CompanyRepository implements ICompanyRepository {
 
   async list(): Promise<Company[]> {
     const companys = await this.companyRepository.find({
-      relations: ['user'],
+      relations: ['user', 'locations'],
     });
 
     return companys;

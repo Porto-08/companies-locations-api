@@ -13,6 +13,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { AuthMiddleware } from './shared/middlewares/auth.middleware';
 import { Company } from './modules/companys/infra/typeorm/entities/Company';
 import { CompanyModule } from './modules/companys/company.module';
+import { Location } from './modules/locations/infra/typeorm/entities/Location';
 
 @Module({
   imports: [
@@ -23,7 +24,7 @@ import { CompanyModule } from './modules/companys/company.module';
       username: 'postgres',
       password: 'root',
       database: 'hublocal',
-      entities: [User, Company],
+      entities: [User, Company, Location],
       synchronize: true,
     }),
     UserModule,

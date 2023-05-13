@@ -1,3 +1,4 @@
+import { Location } from '../../../../locations/infra/typeorm/entities/Location';
 import { User } from '../../../../users/infra/typeorm/entities/User';
 import { ICompany } from '../../../domain/models/ICompany';
 import {
@@ -5,6 +6,7 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -33,4 +35,7 @@ export class Company implements ICompany {
     onDelete: 'CASCADE',
   })
   user: User;
+
+  @OneToMany(() => Location, (location) => location.company)
+  locations: Location[];
 }
