@@ -2,11 +2,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { IUser } from '../../../domain/models/IUser';
-import { Exclude } from 'class-transformer';
+import { Company } from 'src/modules/companys/infra/typeorm/entities/Company';
 
 @Entity('users')
 export class User implements IUser {
@@ -19,10 +20,7 @@ export class User implements IUser {
   @Column()
   email: string;
 
-  @Column({
-    select: false,
-  })
-  @Exclude()
+  @Column()
   password: string;
 
   @CreateDateColumn()
@@ -30,4 +28,7 @@ export class User implements IUser {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @OneToMany(() => Company, (company) => company.user)
+  companys: Company[];
 }

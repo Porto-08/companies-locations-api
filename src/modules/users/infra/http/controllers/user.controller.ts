@@ -2,6 +2,8 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Delete,
+  Get,
   Inject,
   Param,
   Post,
@@ -10,6 +12,8 @@ import {
 import { CreateUserDTO } from 'src/modules/users/dtos/create-user.dto';
 import { UpdateUserDTO } from 'src/modules/users/dtos/update-user.dto';
 import { CreateUserService } from 'src/modules/users/services/create-user.service';
+import { DeleteUserService } from 'src/modules/users/services/delete-user.service';
+import { ListUsersService } from 'src/modules/users/services/list-user.service';
 import { UpdateUserService } from 'src/modules/users/services/update-user.service';
 
 @Controller('users')
@@ -20,7 +24,20 @@ export class UserController {
 
     @Inject(UpdateUserService)
     private readonly updateUserService: UpdateUserService,
+
+    @Inject(DeleteUserService)
+    private readonly deleteUserService: DeleteUserService,
+
+    @Inject(ListUsersService)
+    private readonly listUsersService: ListUsersService,
   ) {}
+
+  @Get()
+  async list() {
+    const users = await this.listUsersService.execute();
+
+    return users;
+  }
 
   @Post('create')
   async create(@Body() user: CreateUserDTO) {
@@ -38,5 +55,12 @@ export class UserController {
     const updatedUser = await this.updateUserService.execute(id, user);
 
     return updatedUser;
+  }
+
+  @Delete('delete/:id')
+  async delete(@Param('id') id: number) {
+    const deletedUser = await this.deleteUserService.execute(id);
+
+    return deletedUser;
   }
 }

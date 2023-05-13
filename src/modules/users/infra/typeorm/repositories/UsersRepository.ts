@@ -13,7 +13,10 @@ export class UsersRepository implements IUserRepository {
   ) {}
 
   async findById(id: number): Promise<User | undefined> {
-    const user = await this.usersRepository.findOneBy({ id });
+    const user = await this.usersRepository.findOneBy({
+      id: id,
+      companys: true,
+    });
 
     if (!user) {
       return undefined;
@@ -25,6 +28,7 @@ export class UsersRepository implements IUserRepository {
   async findByEmail(email: string): Promise<User | undefined> {
     const user = await this.usersRepository.findOne({
       where: { email },
+      select: ['id', 'name', 'email', 'password', 'created_at', 'updated_at'],
     });
 
     if (!user) {
@@ -40,12 +44,17 @@ export class UsersRepository implements IUserRepository {
     return newUser;
   }
 
-  async delete(id: string): Promise<void> {
+  async delete(id: number): Promise<void> {
     await this.usersRepository.delete(id);
   }
 
   async list(): Promise<User[]> {
-    const users = await this.usersRepository.find();
+    const users = await this.usersRepository.find({
+      select: ['id', 'name', 'email', 'created_at', 'updated_at'],
+      relations: {
+        companys: true,
+      },
+    });
 
     return users;
   }

@@ -11,24 +11,32 @@ export class CreateUserService {
   ) {}
 
   async execute(user: CreateUserDTO) {
-    const userAlreadyExists = await this.usersRepository.findByEmail(
-      user.email,
-    );
+    try {
+      const userAlreadyExists = await this.usersRepository.findByEmail(
+        user.email,
+      );
 
-    if (userAlreadyExists) {
-      throw new BadRequestException('User already exists.');
+      if (userAlreadyExists) {
+        throw new BadRequestException('User already exists.');
+      }
+
+      const passwordHash = await bcrypt.hash(user.password, 8);
+
+      const createdUser = await this.usersRepository.save({
+        ...user,
+        password: passwordHash,
+      });
+
+      return {
+        ...createdUser,
+        password: undefined,
+      };
+    } catch (error) {
+      console.log(error);
+      throw new BadRequestException(
+        error.message || 'Internal server error.',
+        error.status || 500,
+      );
     }
-
-    const passwordHash = await bcrypt.hash(user.password, 8);
-
-    const createdUser = await this.usersRepository.save({
-      ...user,
-      password: passwordHash,
-    });
-
-    return {
-      ...createdUser,
-      password: undefined,
-    };
   }
 }
