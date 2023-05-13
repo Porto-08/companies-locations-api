@@ -12,10 +12,8 @@ export class UsersRepository implements IUserRepository {
     private usersRepository: Repository<User>,
   ) {}
 
-  async findById(id: string): Promise<User | undefined> {
-    const user = await this.usersRepository.findOne({
-      where: { id },
-    });
+  async findById(id: number): Promise<User | undefined> {
+    const user = await this.usersRepository.findOneBy({ id });
 
     if (!user) {
       return undefined;
