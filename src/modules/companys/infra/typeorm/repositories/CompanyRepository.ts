@@ -4,6 +4,7 @@ import { Company } from '../entities/Company';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ICreateCompany } from 'src/modules/companys/domain/models/ICreateCompany';
+import { CompanyPaginated } from 'src/modules/companys/interfaces';
 
 @Injectable()
 export class CompanyRepository implements ICompanyRepository {
@@ -65,5 +66,70 @@ export class CompanyRepository implements ICompanyRepository {
     });
 
     return companys;
+  }
+
+  async listPaginated(page: number, limit: number): Promise<CompanyPaginated> {
+    const skip = (page - 1) * limit;
+
+    const [companys, count] = await this.companyRepository.findAndCount({
+      relations: ['user', 'locations'],
+      skip,
+      take: limit,
+    });
+
+    const next_page = limit * page < count ? page + 1 : null;
+    const before_page = page !== 1 ? page - 1 : null;
+    const total_locations = companys.reduce(
+      (acc, company) => acc + company.locations.length,
+      0,
+    );
+
+    return {
+      data: companys as Company[],
+      meta: {
+        total: count,
+        qtd_locations: total_locations,
+        page,
+        last_page: before_page,
+        next_page,
+      },
+    };
+  }
+
+  async listPaginatedByUser(
+    page: number,
+    limit: number,
+    userId: number,
+  ): Promise<CompanyPaginated> {
+    const skip = (page - 1) * limit;
+
+    const [companys, count] = await this.companyRepository.findAndCount({
+      relations: ['user', 'locations'],
+      skip,
+      take: limit,
+      where: {
+        user: {
+          id: userId,
+        },
+      },
+    });
+
+    const next_page = limit * page < count ? page + 1 : null;
+    const before_page = page !== 1 ? page - 1 : null;
+    const total_locations = companys.reduce(
+      (acc, company) => acc + company.locations.length,
+      0,
+    );
+
+    return {
+      data: companys as Company[],
+      meta: {
+        total: count,
+        qtd_locations: total_locations,
+        page,
+        last_page: before_page,
+        next_page,
+      },
+    };
   }
 }

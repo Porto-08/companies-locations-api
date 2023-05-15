@@ -14,22 +14,21 @@ import { AuthMiddleware } from './shared/middlewares/auth.middleware';
 import { Company } from './modules/companys/infra/typeorm/entities/Company';
 import { CompanyModule } from './modules/companys/company.module';
 import { Location } from './modules/locations/infra/typeorm/entities/Location';
+import { LocationModule } from './modules/locations/location.module';
+import { LocationController } from './modules/locations/infra/http/controllers/location.controller';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'root',
-      database: 'hublocal',
       entities: [User, Company, Location],
       synchronize: true,
+      url: process.env.DATABASE_URL,
     }),
     UserModule,
     AuthModule,
     CompanyModule,
+    LocationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

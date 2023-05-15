@@ -1,0 +1,22 @@
+version: '3.9'
+services:
+  database:
+      image: postgres:latest
+      ports:
+        - 5432:5432
+      environment:
+        POSTGRES_PASSWORD: root
+        POSTGRES_DB: hublocal
+        POSTGRES_USER: postgres
+  app:
+    build:
+      context: .
+    ports:
+      - 3000:3000
+    environment:
+      - JWT_SECRET=olABjHpk5V2fh7o9IUBNFkOgidVCsd3ZtmqkVnKBL8fvRZk
+      - DATABASE_URL=postgres://postgres:root@postgres:5432/hublocal
+    depends_on:
+      - database
+  
+    

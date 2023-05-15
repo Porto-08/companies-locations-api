@@ -24,7 +24,7 @@ export class Location implements ILocation {
   street: string;
 
   @Column()
-  number: string;
+  number: number;
 
   @Column()
   neighborhood: string;

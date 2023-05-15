@@ -4,7 +4,7 @@ export interface ICreateLocation {
   name: string;
   cep: string;
   street: string;
-  number: string;
+  number: number;
   neighborhood: string;
   city: string;
   state: string;

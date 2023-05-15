@@ -9,6 +9,7 @@ import { UpdateCompanyService } from './services/update-company.service';
 import { ListCompanyService } from './services/list-companys.service';
 import { DeleteCompanyService } from './services/delete-company.service';
 import { ShowCompanyService } from './services/show-company.service';
+import { GetCompanyPerUserService } from './services/get-company-per-user.service';
 
 @Module({
   imports: [UserModule, TypeOrmModule.forFeature([Company])],
@@ -20,6 +21,8 @@ import { ShowCompanyService } from './services/show-company.service';
     ListCompanyService,
     DeleteCompanyService,
     ShowCompanyService,
+    GetCompanyPerUserService,
   ],
+  exports: [CompanyRepository],
 })
 export class CompanyModule {}

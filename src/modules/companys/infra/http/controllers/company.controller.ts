@@ -8,14 +8,18 @@ import {
   Post,
   Put,
   Request,
+  Query,
+  BadRequestException,
 } from '@nestjs/common';
 import { CreateCompanyDTO } from 'src/modules/companys/dtos/create-company.dto';
 import { UpdateCompanyDTO } from 'src/modules/companys/dtos/update-company.dto';
 import { CreateCompanyService } from 'src/modules/companys/services/create-company.service';
 import { DeleteCompanyService } from 'src/modules/companys/services/delete-company.service';
+import { GetCompanyPerUserService } from 'src/modules/companys/services/get-company-per-user.service';
 import { ListCompanyService } from 'src/modules/companys/services/list-companys.service';
 import { ShowCompanyService } from 'src/modules/companys/services/show-company.service';
 import { UpdateCompanyService } from 'src/modules/companys/services/update-company.service';
+import { PaginationDTO } from 'src/shared/dtos/pagination.dto';
 
 @Controller('companys')
 export class CompanyController {
@@ -34,11 +38,43 @@ export class CompanyController {
 
     @Inject(ShowCompanyService)
     private readonly showCompanyService: ShowCompanyService,
+
+    @Inject(GetCompanyPerUserService)
+    private readonly getCompanyPerUserService: GetCompanyPerUserService,
   ) {}
 
   @Get()
-  async list() {
-    const companys = await this.listCompanyService.execute();
+  async list(@Query() query: PaginationDTO) {
+    const { page, limit } = query;
+
+    if (page === '0' || limit === '0') {
+      throw new BadRequestException('Page and limit must be greater than 0');
+    }
+
+    const companys = await this.listCompanyService.execute(
+      Number(page),
+      Number(limit),
+    );
+
+    return companys;
+  }
+
+  @Get('user/:user_id')
+  async listByUser(
+    @Query() query: PaginationDTO,
+    @Param('user_id') user_id: number,
+  ) {
+    const { page, limit } = query;
+
+    if (page === '0' || limit === '0') {
+      throw new BadRequestException('Page and limit must be greater than 0');
+    }
+
+    const companys = await this.getCompanyPerUserService.execute(
+      Number(page),
+      Number(limit),
+      Number(user_id),
+    );
 
     return companys;
   }
