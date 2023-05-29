@@ -43,7 +43,9 @@ npm install
 ```
 
 - Crie o arquivo .env
+```bash
 Existe um arquivo .env.example com um exemplo a ser seguido, apenas troque os valores.
+```
 
 - Inicie o projeto
 ```bash
