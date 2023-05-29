@@ -15,7 +15,6 @@ import { Company } from './modules/companys/infra/typeorm/entities/Company';
 import { CompanyModule } from './modules/companys/company.module';
 import { Location } from './modules/locations/infra/typeorm/entities/Location';
 import { LocationModule } from './modules/locations/location.module';
-import { LocationController } from './modules/locations/infra/http/controllers/location.controller';
 
 @Module({
   imports: [

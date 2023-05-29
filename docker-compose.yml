@@ -9,14 +9,11 @@ services:
         POSTGRES_DB: hublocal
         POSTGRES_USER: postgres
   app:
-    build:
-      context: .
+    image: api-hublocal:latest
     ports:
       - 3000:3000
     environment:
       - JWT_SECRET=olABjHpk5V2fh7o9IUBNFkOgidVCsd3ZtmqkVnKBL8fvRZk
-      - DATABASE_URL=postgres://postgres:root@postgres:5432/hublocal
+      - DATABASE_URL=postgres://postgres:root@database:5432/hublocal
     depends_on:
       - database
-  
-    

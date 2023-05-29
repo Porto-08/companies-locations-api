@@ -1,14 +1,8 @@
 FROM node:16.14.2
-
 WORKDIR /app
-
-COPY . .
-
-ENV JWT_SECRET=olABjHpk5V2fh7o9IUBNFkOgidVCsd3ZtmqkVnKBL8fvRZk 
-ENV DATABASE_URL=postgres://postgres:root@postgres:5432/hublocal
-
+COPY package*.json ./
 RUN npm install
-
-ENTRYPOINT npm start
-
+ENV JWT_SECRET=olABjHpk5V2fh7o9IUBNFkOgidVCsd3ZtmqkVnKBL8fvRZk 
+COPY . . 
 EXPOSE 3000
+ENTRYPOINT npm start
