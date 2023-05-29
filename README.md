@@ -16,27 +16,38 @@ Sistema de armazenamento de locais de empresas
 - Criar/Listar/Deletar/Editar empresas 
 - Criar/Listar/Deletar/Editar locais pertencentes a uma empresa 
 
-## Instalação
+## Instalação/Inicialização
 - Clone o projeto
 ```bash
 git clone https://github.com/Porto-08/hublocal-api.git
 ```
+
+### Docker
+Obs: com esta opção já é feita a criação do banco de dados.
+
+- Na pasta do projeto, crie a imagem do App
+```bash
+docker build . -t api-hublocal
+```
+- Inicie o projeto
+```bash
+docker-compose up -d
+```
+
+### Node
+Obs: Para pleno funcionamento do projeto é necessário criar um banco de dados Postgres na sua maquina ou com o Docker com nome "hublocal".
 
 - Instale as dependências
 ```bash
 npm install
 ```
 
-- Banco de Dados
-
-No arquivo .env.example tem uma URL de exemplo para conexão com o banco de dados. É preciso ter um banco Postgres criado chamado 'hublocal' para funcionamento da API, as tabelas serão criadas automaticamente ao conectar com o banco.
-
-OBS: (Tentei utilizar o docker-compose para criar os containers da aplicação e do banco, porém não tive sucesso ao fazê-lo.)
+- Crie o arquivo .env
+Existe um arquivo .env.example com um exemplo a ser seguido, apenas troque os valores.
 
 - Inicie o projeto
 ```bash
-npm run start:dev
+npm start
 ```
 
 
->  This is a challenge by [Coodesh](https://coodesh.com/)
