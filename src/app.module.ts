@@ -15,14 +15,18 @@ import { Company } from './modules/companys/infra/typeorm/entities/Company';
 import { CompanyModule } from './modules/companys/company.module';
 import { Location } from './modules/locations/infra/typeorm/entities/Location';
 import { LocationModule } from './modules/locations/location.module';
+import { db_constants } from './shared/config/constants/db_constants';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'postgres',
+      type: 'mssql',
       entities: [User, Company, Location],
-      synchronize: true,
-      url: process.env.DATABASE_URL,
+      host: db_constants.db_host,
+      port: Number(db_constants.db_port),
+      username: db_constants.db_username,
+      password: db_constants.db_password,
+      database: db_constants.db_database,
     }),
     UserModule,
     AuthModule,
