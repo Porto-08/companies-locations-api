@@ -1,4 +1,4 @@
-# Hublocal - Back-end
+# Companies Locations - Back-end
 Sistema de armazenamento de locais de empresas
 
 ## Tecnologias 
