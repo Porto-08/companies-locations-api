@@ -1,10 +1,10 @@
 {
-  "name": "api-hublocal",
+  "name": "companies-locations-api",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "API for companies and your locations",
+  "author": "Samuel Porto <",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",

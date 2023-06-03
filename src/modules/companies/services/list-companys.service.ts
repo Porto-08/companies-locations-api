@@ -10,8 +10,8 @@ export class ListCompanyService {
   ) {}
 
   async execute(page: number, limit: number): Promise<CompanyPaginated> {
-    const companys = await this.companyRepository.listPaginated(page, limit);
+    const companies = await this.companyRepository.listPaginated(page, limit);
 
-    return companys;
+    return companies;
   }
 }

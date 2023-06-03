@@ -11,17 +11,17 @@ import {
   Query,
   BadRequestException,
 } from '@nestjs/common';
-import { CreateCompanyDTO } from 'src/modules/companys/dtos/create-company.dto';
-import { UpdateCompanyDTO } from 'src/modules/companys/dtos/update-company.dto';
-import { CreateCompanyService } from 'src/modules/companys/services/create-company.service';
-import { DeleteCompanyService } from 'src/modules/companys/services/delete-company.service';
-import { GetCompanyPerUserService } from 'src/modules/companys/services/get-company-per-user.service';
-import { ListCompanyService } from 'src/modules/companys/services/list-companys.service';
-import { ShowCompanyService } from 'src/modules/companys/services/show-company.service';
-import { UpdateCompanyService } from 'src/modules/companys/services/update-company.service';
+import { CreateCompanyDTO } from 'src/modules/companies/dtos/create-company.dto';
+import { UpdateCompanyDTO } from 'src/modules/companies/dtos/update-company.dto';
+import { CreateCompanyService } from 'src/modules/companies/services/create-company.service';
+import { DeleteCompanyService } from 'src/modules/companies/services/delete-company.service';
+import { GetCompanyPerUserService } from 'src/modules/companies/services/get-company-per-user.service';
+import { ListCompanyService } from 'src/modules/companies/services/list-companys.service';
+import { ShowCompanyService } from 'src/modules/companies/services/show-company.service';
+import { UpdateCompanyService } from 'src/modules/companies/services/update-company.service';
 import { PaginationDTO } from 'src/shared/dtos/pagination.dto';
 
-@Controller('companys')
+@Controller('companies')
 export class CompanyController {
   constructor(
     @Inject(CreateCompanyService)
@@ -51,12 +51,12 @@ export class CompanyController {
       throw new BadRequestException('Page and limit must be greater than 0');
     }
 
-    const companys = await this.listCompanyService.execute(
+    const companies = await this.listCompanyService.execute(
       Number(page),
       Number(limit),
     );
 
-    return companys;
+    return companies;
   }
 
   @Get('user/:user_id')
@@ -70,13 +70,13 @@ export class CompanyController {
       throw new BadRequestException('Page and limit must be greater than 0');
     }
 
-    const companys = await this.getCompanyPerUserService.execute(
+    const companies = await this.getCompanyPerUserService.execute(
       Number(page),
       Number(limit),
       Number(user_id),
     );
 
-    return companys;
+    return companies;
   }
 
   @Get(':company_id')

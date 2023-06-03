@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { LocationRepository } from './infra/typeorm/repositories/LocationRepository';
 import { Location } from './infra/typeorm/entities/Location';
 import { CreateLocationService } from './services/create-location.service';
-import { CompanyModule } from '../companys/company.module';
+import { CompanyModule } from '../companies/company.module';
 import { LocationController } from './infra/http/controllers/location.controller';
 import { ListLocationService } from './services/list-location.service';
 import { ShowLocationService } from './services/show-location.service';

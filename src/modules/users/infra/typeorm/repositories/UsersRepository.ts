@@ -15,7 +15,7 @@ export class UsersRepository implements IUserRepository {
   async findById(id: number): Promise<User | undefined> {
     const user = await this.usersRepository.findOneBy({
       id: id,
-      companys: true,
+      companies: true,
     });
 
     if (!user) {
@@ -52,7 +52,7 @@ export class UsersRepository implements IUserRepository {
     const users = await this.usersRepository.find({
       select: ['id', 'name', 'email', 'created_at', 'updated_at'],
       relations: {
-        companys: true,
+        companies: true,
       },
     });
 

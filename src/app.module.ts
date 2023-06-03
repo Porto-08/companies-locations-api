@@ -11,8 +11,8 @@ import { UserModule } from './modules/users/users.module';
 import { User } from './modules/users/infra/typeorm/entities/User';
 import { AuthModule } from './modules/auth/auth.module';
 import { AuthMiddleware } from './shared/middlewares/auth.middleware';
-import { Company } from './modules/companys/infra/typeorm/entities/Company';
-import { CompanyModule } from './modules/companys/company.module';
+import { Company } from './modules/companies/infra/typeorm/entities/Company';
+import { CompanyModule } from './modules/companies/company.module';
 import { Location } from './modules/locations/infra/typeorm/entities/Location';
 import { LocationModule } from './modules/locations/location.module';
 import { db_constants } from './shared/config/constants/db_constants';
@@ -20,7 +20,7 @@ import { db_constants } from './shared/config/constants/db_constants';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'mssql',
+      type: 'postgres',
       entities: [User, Company, Location],
       host: db_constants.db_host,
       port: Number(db_constants.db_port),
@@ -48,6 +48,10 @@ export class AppModule implements NestModule {
         {
           path: '/auth/login',
           method: RequestMethod.POST,
+        },
+        {
+          path: '/',
+          method: RequestMethod.GET,
         },
       )
       .forRoutes('*');

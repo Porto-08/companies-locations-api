@@ -1,10 +1,10 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
-import { ICompanyRepository } from 'src/modules/companys/domain/repositories/ICompanyRepository';
+import { Injectable } from '@nestjs/common';
+import { ICompanyRepository } from 'src/modules/companies/domain/repositories/ICompanyRepository';
 import { Company } from '../entities/Company';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ICreateCompany } from 'src/modules/companys/domain/models/ICreateCompany';
-import { CompanyPaginated } from 'src/modules/companys/interfaces';
+import { ICreateCompany } from 'src/modules/companies/domain/models/ICreateCompany';
+import { CompanyPaginated } from 'src/modules/companies/interfaces';
 
 @Injectable()
 export class CompanyRepository implements ICompanyRepository {
@@ -61,17 +61,17 @@ export class CompanyRepository implements ICompanyRepository {
   }
 
   async list(): Promise<Company[]> {
-    const companys = await this.companyRepository.find({
+    const companies = await this.companyRepository.find({
       relations: ['user', 'locations'],
     });
 
-    return companys;
+    return companies;
   }
 
   async listPaginated(page: number, limit: number): Promise<CompanyPaginated> {
     const skip = (page - 1) * limit;
 
-    const [companys, count] = await this.companyRepository.findAndCount({
+    const [companies, count] = await this.companyRepository.findAndCount({
       relations: ['user', 'locations'],
       skip,
       take: limit,
@@ -79,13 +79,13 @@ export class CompanyRepository implements ICompanyRepository {
 
     const next_page = limit * page < count ? page + 1 : null;
     const before_page = page !== 1 ? page - 1 : null;
-    const total_locations = companys.reduce(
+    const total_locations = companies.reduce(
       (acc, company) => acc + company.locations.length,
       0,
     );
 
     return {
-      data: companys as Company[],
+      data: companies as Company[],
       meta: {
         total: count,
         qtd_locations: total_locations,
@@ -103,7 +103,7 @@ export class CompanyRepository implements ICompanyRepository {
   ): Promise<CompanyPaginated> {
     const skip = (page - 1) * limit;
 
-    const [companys, count] = await this.companyRepository.findAndCount({
+    const [companies, count] = await this.companyRepository.findAndCount({
       relations: ['user', 'locations'],
       skip,
       take: limit,
@@ -116,13 +116,13 @@ export class CompanyRepository implements ICompanyRepository {
 
     const next_page = limit * page < count ? page + 1 : null;
     const before_page = page !== 1 ? page - 1 : null;
-    const total_locations = companys.reduce(
+    const total_locations = companies.reduce(
       (acc, company) => acc + company.locations.length,
       0,
     );
 
     return {
-      data: companys as Company[],
+      data: companies as Company[],
       meta: {
         total: count,
         qtd_locations: total_locations,

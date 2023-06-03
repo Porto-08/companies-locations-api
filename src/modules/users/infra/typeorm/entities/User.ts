@@ -7,8 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { IUser } from '../../../domain/models/IUser';
-import { Company } from 'src/modules/companys/infra/typeorm/entities/Company';
-import { Exclude } from 'class-transformer';
+import { Company } from 'src/modules/companies/infra/typeorm/entities/Company';
 
 @Entity('users')
 export class User implements IUser {
@@ -31,5 +30,5 @@ export class User implements IUser {
   updated_at: Date;
 
   @OneToMany(() => Company, (company) => company.user)
-  companys: Company[];
+  companies: Company[];
 }

@@ -1,4 +1,4 @@
-import { Company } from 'src/modules/companys/infra/typeorm/entities/Company';
+import { Company } from 'src/modules/companies/infra/typeorm/entities/Company';
 
 export interface ICreateLocation {
   name: string;

@@ -1,4 +1,4 @@
-import { Company } from '../../../companys/infra/typeorm/entities/Company';
+import { Company } from '../../../companies/infra/typeorm/entities/Company';
 
 export interface ILocation {
   id: number;

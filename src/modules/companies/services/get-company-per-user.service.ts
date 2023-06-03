@@ -14,12 +14,12 @@ export class GetCompanyPerUserService {
     limit: number,
     userId: number,
   ): Promise<CompanyPaginated> {
-    const companys = await this.companyRepository.listPaginatedByUser(
+    const companies = await this.companyRepository.listPaginatedByUser(
       page,
       limit,
       userId,
     );
 
-    return companys;
+    return companies;
   }
 }

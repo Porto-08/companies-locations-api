@@ -5,13 +5,14 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('companys')
+@Entity('companies')
 export class Company implements ICompany {
   @PrimaryGeneratedColumn()
   id: number;
@@ -31,9 +32,10 @@ export class Company implements ICompany {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @ManyToOne(() => User, (user) => user.companys, {
+  @ManyToOne(() => User, (user) => user.companies, {
     onDelete: 'CASCADE',
   })
+  @JoinColumn({ name: 'user_id' })
   user: User;
 
   @OneToMany(() => Location, (location) => location.company)
