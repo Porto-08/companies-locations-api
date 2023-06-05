@@ -7,7 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { IUser } from '../../../domain/models/IUser';
-import { Company } from 'src/modules/companies/infra/typeorm/entities/Company';
+import { Company } from '../../../../companies/infra/typeorm/entities/Company';
 
 @Entity('users')
 export class User implements IUser {

@@ -12,13 +12,13 @@ import {
 } from '@nestjs/common';
 import { CreateLocationDTO } from '../../../dtos/create-location.dto';
 import { CreateLocationService } from '../../../services/create-location.service';
-import { ListLocationService } from 'src/modules/locations/services/list-location.service';
-import { ShowLocationService } from 'src/modules/locations/services/show-location.service';
-import { DeleteLocationService } from 'src/modules/locations/services/delete-location.service';
-import { UpdateLocationService } from 'src/modules/locations/services/update-location.service';
-import { UpdateLocationDTO } from 'src/modules/locations/dtos/update-location.dto';
-import { PaginationDTO } from 'src/shared/dtos/pagination.dto';
-import { ListLocationByCompanyService } from 'src/modules/locations/services/list-location-by-company.service';
+import { ListLocationService } from '../../../services/list-location.service';
+import { ShowLocationService } from '../../../services/show-location.service';
+import { DeleteLocationService } from '../../../services/delete-location.service';
+import { UpdateLocationService } from '../../../services/update-location.service';
+import { UpdateLocationDTO } from '../../../dtos/update-location.dto';
+import { PaginationDTO } from '../../../../../shared/dtos/pagination.dto';
+import { ListLocationByCompanyService } from '../../../services/list-location-by-company.service';
 
 @Controller('locations')
 export class LocationController {

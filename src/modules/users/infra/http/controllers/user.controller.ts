@@ -9,12 +9,12 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { CreateUserDTO } from 'src/modules/users/dtos/create-user.dto';
-import { UpdateUserDTO } from 'src/modules/users/dtos/update-user.dto';
-import { CreateUserService } from 'src/modules/users/services/create-user.service';
-import { DeleteUserService } from 'src/modules/users/services/delete-user.service';
-import { ListUsersService } from 'src/modules/users/services/list-user.service';
-import { UpdateUserService } from 'src/modules/users/services/update-user.service';
+import { CreateUserDTO } from '../../../dtos/create-user.dto';
+import { UpdateUserDTO } from '../../../dtos/update-user.dto';
+import { CreateUserService } from '../../../services/create-user.service';
+import { DeleteUserService } from '../../../services/delete-user.service';
+import { ListUsersService } from '../../../services/list-user.service';
+import { UpdateUserService } from '../../../services/update-user.service';
 
 @Controller('users')
 export class UserController {

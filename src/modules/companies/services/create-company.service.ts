@@ -7,9 +7,8 @@ import {
 import { CompanyRepository } from '../infra/typeorm/repositories/CompanyRepository';
 import { ICreateCompany } from '../domain/models/ICreateCompany';
 import { CreateCompanyDTO } from '../dtos/create-company.dto';
-import e from 'express';
 import { Company } from '../infra/typeorm/entities/Company';
-import { UsersRepository } from 'src/modules/users/infra/typeorm/repositories/UsersRepository';
+import { UsersRepository } from '../../users/infra/typeorm/repositories/UsersRepository';
 
 @Injectable()
 export class CreateCompanyService {

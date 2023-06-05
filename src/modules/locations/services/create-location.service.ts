@@ -1,6 +1,6 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { LocationRepository } from '../infra/typeorm/repositories/LocationRepository';
-import { CompanyRepository } from 'src/modules/companies/infra/typeorm/repositories/CompanyRepository';
+import { CompanyRepository } from '../../companies/infra/typeorm/repositories/CompanyRepository';
 import { CreateLocationDTO } from '../dtos/create-location.dto';
 
 @Injectable()

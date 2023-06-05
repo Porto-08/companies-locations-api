@@ -11,15 +11,15 @@ import {
   Query,
   BadRequestException,
 } from '@nestjs/common';
-import { CreateCompanyDTO } from 'src/modules/companies/dtos/create-company.dto';
-import { UpdateCompanyDTO } from 'src/modules/companies/dtos/update-company.dto';
-import { CreateCompanyService } from 'src/modules/companies/services/create-company.service';
-import { DeleteCompanyService } from 'src/modules/companies/services/delete-company.service';
-import { GetCompanyPerUserService } from 'src/modules/companies/services/get-company-per-user.service';
-import { ListCompanyService } from 'src/modules/companies/services/list-companys.service';
-import { ShowCompanyService } from 'src/modules/companies/services/show-company.service';
-import { UpdateCompanyService } from 'src/modules/companies/services/update-company.service';
-import { PaginationDTO } from 'src/shared/dtos/pagination.dto';
+import { CreateCompanyDTO } from '../../../dtos/create-company.dto';
+import { UpdateCompanyDTO } from '../../../dtos/update-company.dto';
+import { CreateCompanyService } from '../../../services/create-company.service';
+import { DeleteCompanyService } from '../../../services/delete-company.service';
+import { GetCompanyPerUserService } from '../../../services/get-company-per-user.service';
+import { ListCompanyService } from '../../../services/list-companys.service';
+import { ShowCompanyService } from '../../../services/show-company.service';
+import { UpdateCompanyService } from '../../../services/update-company.service';
+import { PaginationDTO } from '../../../../../shared/dtos/pagination.dto';
 
 @Controller('companies')
 export class CompanyController {
