@@ -9,7 +9,7 @@ export class ListCompanyService {
     private readonly companyRepository: CompanyRepository,
   ) {}
 
-  async execute(page: number, limit: number): Promise<CompanyPaginated> {
+  async execute(page = 1, limit = 10): Promise<CompanyPaginated> {
     const companies = await this.companyRepository.listPaginated(page, limit);
 
     return companies;

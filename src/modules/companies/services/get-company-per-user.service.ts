@@ -10,8 +10,8 @@ export class GetCompanyPerUserService {
   ) {}
 
   async execute(
-    page: number,
-    limit: number,
+    page = 1,
+    limit = 10,
     userId: number,
   ): Promise<CompanyPaginated> {
     const companies = await this.companyRepository.listPaginatedByUser(
